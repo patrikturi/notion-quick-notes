@@ -2,10 +2,18 @@
     "name": "Notion Quick Notes",
     "version": "0.1",
     "description": "Utilities for easy note taking with Notion",
-    "permissions": ["declarativeContent", "storage"],
+    "permissions": ["declarativeContent", "storage", "activeTab"],
     "background": {
         "scripts": ["background.js"],
         "persistent": false
+    },
+    "commands": {
+        "new_note": {
+          "suggested_key": {
+            "default": "Alt+T"
+          },
+          "description": "Create new note"
+        }
     },
     "page_action": {
         "default_popup": "popup.html",

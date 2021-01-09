@@ -1,6 +1,13 @@
 chrome.runtime.onInstalled.addListener(function() {
-  chrome.storage.sync.set({color: '#3aa757'}, function() {
-    console.log('The color is green.');
+  
+  chrome.commands.onCommand.addListener(function(command) {
+    console.log('Command:', command);
+    if(command === 'new_note') {
+      chrome.tabs.executeScript({
+        file: 'click_new_note.js'
+      });
+    }
+
   });
   chrome.declarativeContent.onPageChanged.removeRules(undefined, function() {
     chrome.declarativeContent.onPageChanged.addRules([{
@@ -9,6 +16,6 @@ chrome.runtime.onInstalled.addListener(function() {
       })
       ],
           actions: [new chrome.declarativeContent.ShowPageAction()]
-    }]);
+        }]);
   });
 });
