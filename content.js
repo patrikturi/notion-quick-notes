@@ -13,3 +13,24 @@ chrome.runtime.onMessage.addListener(
         }
     }
 );
+
+function getPageItems() {
+    var itemXPath = "//div[contains(@class, 'notion-page-block')]//div[@class='notranslate']";
+    var items = document.evaluate(buttonXPath, document, null, XPathResult.UNORDERED_NODE_ITERATOR_TYPE, null);
+    return items;
+}
+
+function getPageTitles(pageItems) {
+    // while(node = items.iterateNext())
+    // node.textContent
+    return 'hello';
+}
+
+function getLabels(pageTitles) {
+
+}
+
+module.exports = {
+    getPageTitles: getPageTitles,
+    getLabels: getLabels,
+}
