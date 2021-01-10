@@ -2,11 +2,17 @@
     "name": "Notion Quick Notes",
     "version": "0.1",
     "description": "Utilities for easy note taking with Notion",
-    "permissions": ["declarativeContent", "storage", "activeTab"],
+    "permissions": ["declarativeContent", "storage", "tabs", "activeTab", "https://*.notion.so/*"],
     "background": {
         "scripts": ["background.js"],
         "persistent": false
     },
+    "content_scripts": [
+        {
+            "matches": ["https://*.notion.so/*"],
+            "js": ["content.js"]
+        }
+    ],
     "commands": {
         "new_note": {
           "suggested_key": {
