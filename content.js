@@ -21,13 +21,26 @@ function getPageItems() {
 }
 
 function getPageTitles(pageItems) {
-    // while(node = items.iterateNext())
-    // node.textContent
-    return 'hello';
+    var titles = [];
+    while(node = pageItems.iterateNext()) {
+        titles.push(node.textContent);
+    }
+    return titles;
 }
 
 function getLabels(pageTitles) {
 
+    var re = /\[(.+?)\]/g;
+
+    labels = pageTitles.reduce((acc, title) => {
+        var results = [...title.matchAll(re)];
+        var allCaptures = results.map(result => result[1].toLowerCase());
+        return new Set([...acc, ...allCaptures]);
+    }, new Set());
+
+    var labelsList = [...labels];
+    labelsList.sort();
+    return labelsList;
 }
 
 module.exports = {
