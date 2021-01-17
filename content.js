@@ -51,7 +51,9 @@ function getLabels(pageTitles) {
     return labelsList;
 }
 
-// module.exports = {
-//     getPageTitles: getPageTitles,
-//     getLabels: getLabels,
-// }
+if (typeof exports !== 'undefined') {
+    module.exports = {
+        getPageTitles: getPageTitles,
+        getLabels: getLabels,
+    }
+}
