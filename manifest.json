@@ -19,6 +19,11 @@
             "default": "Alt+T"
           },
           "description": "Create new note"
+        },
+        "_execute_page_action": {
+            "suggested_key": {
+                "default": "Alt+L"
+              }
         }
     },
     "page_action": {
