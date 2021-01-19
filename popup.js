@@ -1,9 +1,9 @@
 chrome.runtime.sendMessage({ command: 'get_labels_bg' });
 
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
-  console.log('LABELS');
-
   if (request.command === 'send_labels') {
+    console.log(request.command);
+
     var labels = request.data;
     var listElement = document.getElementById('labels-list');
 

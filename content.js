@@ -1,14 +1,6 @@
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
   if (request.command === 'new_note') {
-    var buttonXPath = "//div[text()='New page']";
-    var buttonElement = document.evaluate(
-      buttonXPath,
-      document,
-      null,
-      XPathResult.FIRST_ORDERED_NODE_TYPE,
-      null
-    ).singleNodeValue;
-
+    var buttonElement = getNewPageButton();
     buttonElement.click();
 
     sendResponse({ status: 'done' });
@@ -23,15 +15,15 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
   }
 });
 
+function getNewPageButton() {
+  var xpath = "//div[text()='New page']";
+  return document.evaluate(xpath, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE)
+    .singleNodeValue;
+}
+
 function getPageItems() {
-  var itemXPath = "//div[contains(@class, 'notion-page-block')]//div[@class='notranslate']";
-  var items = document.evaluate(
-    itemXPath,
-    document,
-    null,
-    XPathResult.UNORDERED_NODE_ITERATOR_TYPE,
-    null
-  );
+  var xpath = "//div[contains(@class, 'notion-page-block')]//div[@class='notranslate']";
+  var items = document.evaluate(xpath, document, null, XPathResult.UNORDERED_NODE_ITERATOR_TYPE);
   return items;
 }
 
