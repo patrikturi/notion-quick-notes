@@ -1,5 +1,7 @@
 chrome.runtime.onInstalled.addListener(function () {
   chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
+    console.log(`Command: ${request.command}`);
+
     if (request.command === 'get_labels_bg') {
       queryActiveTab(function (tabId) {
         chrome.tabs.sendMessage(tabId, { command: 'get_labels_content' }, function (response) {
@@ -10,6 +12,10 @@ chrome.runtime.onInstalled.addListener(function () {
             data: response.data,
           });
         });
+      });
+    } else if (request.command === 'go_to_label') {
+      queryActiveTab(function (tabId) {
+        chrome.tabs.sendMessage(tabId, request);
       });
     }
   });

@@ -11,6 +11,11 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
       var listItem = document.createElement('li');
       var textNode = document.createTextNode(label);
       listItem.appendChild(textNode);
+      listItem.addEventListener('click', function (e) {
+        e.preventDefault();
+        chrome.runtime.sendMessage({ command: 'go_to_label', label: label });
+        window.close();
+      });
       listElement.appendChild(listItem);
     });
     sendResponse({ status: 'done' });
