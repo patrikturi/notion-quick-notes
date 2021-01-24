@@ -1,7 +1,8 @@
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
   if (request.command === 'new_note') {
     var buttonElement = getNewPageButton();
-    buttonElement.click();
+
+    click(buttonElement);
 
     sendResponse({ status: 'done' });
   } else if (request.command === 'get_labels_content') {
@@ -14,6 +15,12 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
     sendResponse({ data: labels });
   }
 });
+
+function click(element) {
+  var event = document.createEvent('HTMLEvents');
+  event.initEvent('click', true, true);
+  element.dispatchEvent(event);
+}
 
 function getNewPageButton() {
   var xpath = "//div[text()='New page']";
