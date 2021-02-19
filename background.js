@@ -5,12 +5,12 @@ chrome.runtime.onInstalled.addListener(function () {
     if (request.command === 'get_labels_bg') {
       queryActiveTab(function (tabId) {
         chrome.tabs.sendMessage(tabId, { command: 'get_labels_content' }, function (response) {
-          console.log(response.data);
-
-          chrome.runtime.sendMessage({
-            command: 'send_labels',
-            data: response.data,
-          });
+          if (response) {
+            chrome.runtime.sendMessage({
+              command: 'send_labels',
+              data: response.data,
+            });
+          }
         });
       });
     } else if (request.command === 'go_to_label') {
