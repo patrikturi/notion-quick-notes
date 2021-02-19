@@ -18,6 +18,27 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
       });
       listElement.appendChild(listItem);
     });
+
+    if (labels.length === 0) {
+      var noLabelsHelpElement = document.getElementById('help-no-labels');
+      noLabelsHelpElement.style.display = 'block';
+
+      // var helpElement = document.getElementById('help');
+
+      // var helpText = 'Did not find any labels';
+      // var element = document.createElement('div');
+      // var textNode = document.createTextNode(helpText);
+      // element.appendChild(textNode);
+      // helpElement.appendChild(element);
+
+      // helpText =
+      //   'You can create a label by using square brakets in the title of a page, eg: [books]';
+      // element = document.createElement('div');
+      // textNode = document.createTextNode(helpText);
+      // element.appendChild(textNode);
+      // helpElement.appendChild(element);
+    }
+
     sendResponse({ status: 'done' });
   }
 });
