@@ -22,21 +22,6 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     if (labels.length === 0) {
       const noLabelsHelpElement = document.getElementById('help-no-labels');
       noLabelsHelpElement.style.display = 'block';
-
-      // let helpElement = document.getElementById('help');
-
-      // let helpText = 'Did not find any labels';
-      // let element = document.createElement('div');
-      // let textNode = document.createTextNode(helpText);
-      // element.appendChild(textNode);
-      // helpElement.appendChild(element);
-
-      // helpText =
-      //   'You can create a label by using square brakets in the title of a page, eg: [books]';
-      // element = document.createElement('div');
-      // textNode = document.createTextNode(helpText);
-      // element.appendChild(textNode);
-      // helpElement.appendChild(element);
     }
 
     sendResponse({ status: 'done' });
