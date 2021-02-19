@@ -1,11 +1,11 @@
 const { test, expect } = require('@jest/globals');
 const content = require('./content');
 
-function mockNode(title) {
+const mockNode = (title) => {
   return {
     textContent: title,
   };
-}
+};
 
 test('extracts page titles', () => {
   const nodes = {

@@ -1,10 +1,10 @@
-chrome.runtime.onInstalled.addListener(function () {
-  chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
+chrome.runtime.onInstalled.addListener(() => {
+  chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     console.log(`Command: ${request.command}`);
 
     if (request.command === 'get_labels_bg') {
-      queryActiveTab(function (tabId) {
-        chrome.tabs.sendMessage(tabId, { command: 'get_labels_content' }, function (response) {
+      queryActiveTab((tabId) => {
+        chrome.tabs.sendMessage(tabId, { command: 'get_labels_content' }, (response) => {
           if (response) {
             chrome.runtime.sendMessage({
               command: 'send_labels',
@@ -14,20 +14,20 @@ chrome.runtime.onInstalled.addListener(function () {
         });
       });
     } else if (request.command === 'go_to_label') {
-      queryActiveTab(function (tabId) {
+      queryActiveTab((tabId) => {
         chrome.tabs.sendMessage(tabId, request);
       });
     }
   });
 
-  chrome.commands.onCommand.addListener(function (command) {
+  chrome.commands.onCommand.addListener((command) => {
     console.log('Command:', command);
-    queryActiveTab(function (tabId) {
+    queryActiveTab((tabId) => {
       chrome.tabs.sendMessage(tabId, { command: command });
     });
   });
 
-  chrome.declarativeContent.onPageChanged.removeRules(undefined, function () {
+  chrome.declarativeContent.onPageChanged.removeRules(undefined, () => {
     chrome.declarativeContent.onPageChanged.addRules([
       {
         conditions: [
@@ -41,8 +41,8 @@ chrome.runtime.onInstalled.addListener(function () {
   });
 });
 
-function queryActiveTab(callback) {
-  chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+const queryActiveTab = (callback) => {
+  chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
     callback(tabs[0].id);
   });
-}
+};

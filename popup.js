@@ -1,17 +1,17 @@
 chrome.runtime.sendMessage({ command: 'get_labels_bg' });
 
-chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.command === 'send_labels') {
     console.log(request.command);
 
-    var labels = request.data;
-    var listElement = document.getElementById('labels-list');
+    const labels = request.data;
+    const listElement = document.getElementById('labels-list');
 
-    labels.forEach(function (label) {
-      var listItem = document.createElement('li');
-      var textNode = document.createTextNode(label);
+    labels.forEach((label) => {
+      const listItem = document.createElement('li');
+      const textNode = document.createTextNode(label);
       listItem.appendChild(textNode);
-      listItem.addEventListener('click', function (e) {
+      listItem.addEventListener('click', (e) => {
         e.preventDefault();
         chrome.runtime.sendMessage({ command: 'go_to_label', label: label });
         window.close();
@@ -20,14 +20,14 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
     });
 
     if (labels.length === 0) {
-      var noLabelsHelpElement = document.getElementById('help-no-labels');
+      const noLabelsHelpElement = document.getElementById('help-no-labels');
       noLabelsHelpElement.style.display = 'block';
 
-      // var helpElement = document.getElementById('help');
+      // let helpElement = document.getElementById('help');
 
-      // var helpText = 'Did not find any labels';
-      // var element = document.createElement('div');
-      // var textNode = document.createTextNode(helpText);
+      // let helpText = 'Did not find any labels';
+      // let element = document.createElement('div');
+      // let textNode = document.createTextNode(helpText);
       // element.appendChild(textNode);
       // helpElement.appendChild(element);
 

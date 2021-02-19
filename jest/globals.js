@@ -1,7 +1,7 @@
 global.chrome = {
   runtime: {
     onMessage: {
-      addListener: function (callback) {},
+      addListener: (callback) => {},
     },
   },
 };
