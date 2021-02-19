@@ -26,8 +26,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 });
 
 const click = (element) => {
-  const event = document.createEvent('HTMLEvents');
-  event.initEvent('click', true, true);
+  const event = new Event('click', { bubbles: true, cancelable: true });
   element.dispatchEvent(event);
 };
 
