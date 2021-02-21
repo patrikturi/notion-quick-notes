@@ -1,6 +1,6 @@
 {
   "name": "Notion Quick Notes",
-  "version": "0.1",
+  "version": "1.0.0",
   "description": "Utilities for easy note taking with Notion",
   "permissions": ["declarativeContent", "storage", "tabs", "activeTab", "https://*.notion.so/*"],
   "background": {
