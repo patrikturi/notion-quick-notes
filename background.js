@@ -1,3 +1,29 @@
+const loadGAScript = () => {
+  const script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.async = true;
+  script.src = 'https://www.googletagmanager.com/gtag/js?id=UA-190272445-1';
+  script.onload = () => {
+    const gtag = function () {
+      dataLayer.push(arguments);
+    };
+    window.dataLayer = window.dataLayer || [];
+    gtag('js', new Date());
+
+    gtag('config', 'UA-190272445-1', {
+      send_page_view: false,
+    });
+    gtag('event', 'page_view', {
+      page_title: 'BackgroundScript',
+      page_location: 'https://notion-quick-notes.com/background/',
+      page_path: '/background/',
+      send_to: 'UA-190272445-1',
+    });
+  };
+  const s = document.getElementsByTagName('script')[0];
+  s.parentNode.insertBefore(script, s);
+};
+
 chrome.runtime.onInstalled.addListener(() => {
   chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     console.log(`Command: ${request.command}`);
@@ -46,3 +72,5 @@ const queryActiveTab = (callback) => {
     callback(tabs[0].id);
   });
 };
+
+loadGAScript();

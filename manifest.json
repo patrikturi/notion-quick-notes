@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Utilities for easy note taking with Notion",
   "permissions": ["declarativeContent", "activeTab", "https://notion.so/*"],
+  "content_security_policy": "script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com; object-src 'self'",
   "background": {
     "scripts": ["background.js"],
     "persistent": false
