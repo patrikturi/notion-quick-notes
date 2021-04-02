@@ -16,13 +16,14 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     sendResponse({ data: labels });
   } else if (request.command === 'go_to_label') {
     const searchButton = getSearchButton();
-    searchButton.click();
+      click(searchButton);
+
     setTimeout(() => {
       let input = getSearchInput();
       setInputValue(input, '[' + request.label + ']');
 
       sendResponse({ status: 'done' });
-    }, 750);
+      }, 100);
   }
 });
 
