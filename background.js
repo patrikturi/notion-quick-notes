@@ -23,7 +23,7 @@ const installListener = () => {
         });
       });
     } else if (request.command === 'go_to_label') {
-      withContentScript((tabId) => {
+      queryActiveTab((tabId) => { // Content script is already injected
         chrome.tabs.sendMessage(tabId, request);
       });
     }
