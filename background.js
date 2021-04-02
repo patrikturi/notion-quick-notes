@@ -1,4 +1,13 @@
 chrome.runtime.onInstalled.addListener(() => {
+  installListener();
+});
+
+chrome.runtime.onStartup.addListener(() => {
+  installListener();
+});
+
+
+const installListener = () => {
   chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     console.log(`Command: ${request.command}`);
 
@@ -39,7 +48,7 @@ chrome.runtime.onInstalled.addListener(() => {
       },
     ]);
   });
-});
+};
 
 const queryActiveTab = (callback) => {
   chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
