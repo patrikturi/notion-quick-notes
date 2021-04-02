@@ -1,3 +1,4 @@
+
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   console.log(`Command: ${request.command}`);
 
@@ -25,19 +26,19 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   }
 });
 
-const click = (element) => {
+click = (element) => {
   const event = new Event('click', { bubbles: true, cancelable: true });
   element.dispatchEvent(event);
 };
 
-const getSearchInput = () => {
+getSearchInput = () => {
   const xpath = '//input';
   return document.evaluate(xpath, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE)
     .singleNodeValue;
 };
 
 // https://lifesaver.codes/answer/trigger-simulated-input-value-change-for-react-16-(after-react-dom-15-6-0-updated)
-const setInputValue = (input, new_value) => {
+setInputValue = (input, new_value) => {
   if (!input) {
     return;
   }
@@ -53,25 +54,25 @@ const setInputValue = (input, new_value) => {
   input.dispatchEvent(event);
 };
 
-const getNewPageButton = () => {
+getNewPageButton = () => {
   const xpath = "//div[text()='New page']";
   return document.evaluate(xpath, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE)
     .singleNodeValue;
 };
 
-const getSearchButton = () => {
+getSearchButton = () => {
   const xpath = "//div[text()='Quick Find']";
   return document.evaluate(xpath, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE)
     .singleNodeValue;
 };
 
-const getPageItems = () => {
+getPageItems = () => {
   const xpath = "//div[contains(@class, 'notion-page-block')]//div[@class='notranslate']";
   const items = document.evaluate(xpath, document, null, XPathResult.UNORDERED_NODE_ITERATOR_TYPE);
   return items;
 };
 
-const getPageTitles = (pageItems) => {
+getPageTitles = (pageItems) => {
   const titles = [];
   while ((listItem = pageItems.iterateNext())) {
     titles.push(listItem.textContent);
@@ -79,7 +80,7 @@ const getPageTitles = (pageItems) => {
   return titles;
 };
 
-const getLabels = (pageTitles) => {
+getLabels = (pageTitles) => {
   const re = /\[(.+?)\]/g;
 
   const labels = pageTitles.reduce((acc, title) => {

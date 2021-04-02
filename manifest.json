@@ -7,12 +7,6 @@
     "scripts": ["background.js"],
     "persistent": false
   },
-  "content_scripts": [
-    {
-      "matches": ["https://*.notion.so/*"],
-      "js": ["content.js"]
-    }
-  ],
   "commands": {
     "new_note": {
       "suggested_key": {

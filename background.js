@@ -3,7 +3,7 @@ chrome.runtime.onInstalled.addListener(() => {
     console.log(`Command: ${request.command}`);
 
     if (request.command === 'get_labels_bg') {
-      queryActiveTab((tabId) => {
+      withContentScript((tabId) => {
         chrome.tabs.sendMessage(tabId, { command: 'get_labels_content' }, (response) => {
           if (response) {
             chrome.runtime.sendMessage({
@@ -14,7 +14,7 @@ chrome.runtime.onInstalled.addListener(() => {
         });
       });
     } else if (request.command === 'go_to_label') {
-      queryActiveTab((tabId) => {
+      withContentScript((tabId) => {
         chrome.tabs.sendMessage(tabId, request);
       });
     }
@@ -22,7 +22,7 @@ chrome.runtime.onInstalled.addListener(() => {
 
   chrome.commands.onCommand.addListener((command) => {
     console.log('Command:', command);
-    queryActiveTab((tabId) => {
+    withContentScript((tabId) => {
       chrome.tabs.sendMessage(tabId, { command: command });
     });
   });
@@ -44,5 +44,15 @@ chrome.runtime.onInstalled.addListener(() => {
 const queryActiveTab = (callback) => {
   chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
     callback(tabs[0].id);
+  });
+};
+
+const withContentScript = (callback) => {
+  chrome.tabs.executeScript({
+    file: 'content.js'
+  }, () => {
+    queryActiveTab((tabId) => {
+      callback(tabId);
+    });
   });
 };
