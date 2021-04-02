@@ -5,7 +5,7 @@
   "permissions": ["declarativeContent", "activeTab", "https://notion.so/*"],
   "background": {
     "scripts": ["background.js"],
-    "persistent": false
+    "persistent": true
   },
   "commands": {
     "new_note": {
